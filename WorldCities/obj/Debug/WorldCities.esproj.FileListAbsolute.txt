@@ -1,0 +1,2 @@
+C:\Projects\WorldCities\WorldCities\WorldCities\obj\Debug\WorldCities.esproj.SuggestedBindingRedirects.cache
+C:\Projects\WorldCities\WorldCities\WorldCities\obj\Debug\WorldCities.esproj.CoreCompileInputs.cache
