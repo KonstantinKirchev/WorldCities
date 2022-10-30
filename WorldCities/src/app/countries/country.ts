@@ -3,4 +3,5 @@ export interface Country {
   name: string;
   iso2: number;
   iso3: number;
+  totCities: number;
 }
