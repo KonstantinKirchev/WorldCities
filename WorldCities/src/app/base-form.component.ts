@@ -13,18 +13,37 @@ export abstract class BaseFormComponent {
   getErrors(
     control: AbstractControl,
     displayName: string,
+    customMessages: { [key: string]: string } | null = null
   ): string[] {
     var errors: string[] = [];
     Object.keys(control.errors || {}).forEach((key) => {
       switch (key) {
         case 'required':
-          errors.push(displayName + ' is required.');
+          var msg = displayName + ' ';
+          if (customMessages?.[key]) {
+            msg += customMessages?.[key];
+          } else {
+            msg += 'is required.';
+          }
+          errors.push(msg);
           break;
         case 'pattern':
-          errors.push(displayName + ' contains invalid characters.');
+          var msg = displayName + ' ';
+          if (customMessages?.[key]) {
+            msg += customMessages?.[key];
+          } else {
+            msg += 'contains invalid characters.';
+          }
+          errors.push(msg);
           break;
         case 'isDupeField':
-          errors.push(displayName + ' already exists: please choose another.');
+          var msg = displayName + ' ';
+          if (customMessages?.[key]) {
+            msg += customMessages?.[key];
+          } else {
+            msg += 'already exists: please choose another.';
+          }
+          errors.push(msg);
           break;
         default:
           errors.push(displayName + ' is invalid.');
