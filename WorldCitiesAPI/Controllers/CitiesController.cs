@@ -1,11 +1,11 @@
 ﻿namespace WorldCitiesAPI.Controllers
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using WorldCitiesAPI.Data;
+    using WorldCitiesAPI.Data.DTOS;
     using WorldCitiesAPI.Data.Models;
 
     [Route("api/[controller]")]
@@ -24,7 +24,7 @@
         // GET: api/Cities/?pageIndex=0&pageSize=10&sortColumn=name&
         // sortOrder=asc
         [HttpGet]
-        public async Task<ActionResult<ApiResult<City>>> GetCities(
+        public async Task<ActionResult<ApiResult<CityDTO>>> GetCities(
             int pageIndex = 0,
             int pageSize = 10,
             string? sortColumn = null,
@@ -32,8 +32,17 @@
             string? filterColumn = null,
             string? filterQuery = null)
         {
-            return await ApiResult<City>.CreateAsync(
-                        _context.Cities.AsNoTracking(),
+            return await ApiResult<CityDTO>.CreateAsync(
+                        _context.Cities.AsNoTracking()
+                        .Select(c => new CityDTO()
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                            Lat = c.Lat,
+                            Lon = c.Lon,
+                            CountryId = c.Country!.Id,
+                            CountryName = c.Country!.Name
+                        }),
                         pageIndex,
                         pageSize,
                         sortColumn,
