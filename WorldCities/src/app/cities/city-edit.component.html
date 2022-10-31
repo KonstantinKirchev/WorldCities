@@ -54,7 +54,7 @@
     <div>
       <button mat-flat-button color="primary"
               type="submit"
-              [disabled]="form.invalid && form.hasError('isDupeCity')">
+              [disabled]="form.invalid">
         {{ this.id ? "Save" : "Create" }}
       </button>
       <button mat-flat-button color="secondary"
