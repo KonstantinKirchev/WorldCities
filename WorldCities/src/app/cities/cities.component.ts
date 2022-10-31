@@ -4,10 +4,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-
 import { City } from './city';
 import { CityService } from './city.service';
-import { ApiResult } from '../base.service';
 
 @Component({
   selector: 'app-cities',

@@ -6,9 +6,7 @@ import { City } from './city';
 import { Country } from '../countries/country';
 import { map, Observable } from 'rxjs';
 import { BaseFormComponent } from '../base-form.component';
-
 import { CityService } from './city.service';
-import { ApiResult } from '../base.service';
 
 @Component({
   selector: 'app-city-edit',
