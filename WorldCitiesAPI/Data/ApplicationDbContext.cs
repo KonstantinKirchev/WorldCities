@@ -1,14 +1,11 @@
 ﻿namespace WorldCitiesAPI.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using WorldCitiesAPI.Data.Models;
 
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext() : base()
-        {
-        }
-
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
