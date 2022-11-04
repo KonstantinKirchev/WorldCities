@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 import { Country } from './country';
 import { CountryService } from './country.service';
 
@@ -24,17 +25,19 @@ export class CountriesComponent implements OnInit {
   public defaultSortOrder: "asc" | "desc" = "asc";
   defaultFilterColumn: string = "name";
   filterQuery?: string;
+  isAuthenticated?: boolean;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   filterTextChanged: Subject<string> = new Subject<string>();
 
-  constructor(private countryService: CountryService) {
+  constructor(private countryService: CountryService, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.loadData();
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
   // debounce filter text changes
