@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnectionService } from 'angular-connection-service';
 import { AuthService } from './auth/auth.service';
 
 @Component({
@@ -7,12 +8,22 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  title = 'WorldCities';
+  hasNetworkConnection: boolean = true;
+  hasInternetAccess: boolean = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private connectionService: ConnectionService) {
+    this.connectionService.monitor().subscribe((currentState: any) => {
+      this.hasNetworkConnection = currentState.hasNetworkConnection;
+      this.hasInternetAccess = currentState.hasInternetAccess;
+    });
+  }
 
   ngOnInit(): void {
     this.authService.init();
   }
 
-  title = 'WorldCities';
+  public isOnline() {
+    return this.hasNetworkConnection && this.hasInternetAccess;
+  }
 }
